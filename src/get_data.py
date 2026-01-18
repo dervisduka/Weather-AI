@@ -32,10 +32,19 @@ def fetch_albania_weather():
 
         if df is not None and not df.empty:
             # Rregullimi i folderit data
-            base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+            # Gjen folderin ku ndodhet skripti (src)
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+
+            # Ngjitet një nivel lart te rrënja e projektit (Weather-AI)
+            base_dir = os.path.dirname(current_dir)
+
+            # Bashkon rrugën me folderin 'data'
             output_dir = os.path.join(base_dir, 'data')
+
+            # Sigurohet që folderi ekziston
             os.makedirs(output_dir, exist_ok=True)
-            
+
+            # Rruga finale e skedarit                        
             file_path = os.path.join(output_dir, 'tirana_weather_raw.csv')
             df.to_csv(file_path)
             
